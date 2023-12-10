@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const mongoose = require("mongoose");
+const port = 3000;
 const { MongoClient, ServerApiVersion } = require("mongodb");
 
 const mongoUsername = "revsallangula";
@@ -31,3 +33,6 @@ async function run() {
     }
 }
 run().catch(console.dir);
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
