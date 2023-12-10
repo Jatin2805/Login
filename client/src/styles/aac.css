@@ -1,11 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
 
 * {
-
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     /* background: seagreen; */
 }
 
@@ -20,10 +19,8 @@ body {
     align-items: center;
     min-height: 100vh;
     background-color: rgb(238, 249, 248);
-    filter:brightness(8px);
+    filter: brightness(8px);
     box-shadow: black;
-    
-
 }
 
 .wrapper {
@@ -38,7 +35,6 @@ body {
 .wrapper h1 {
     font-size: 36px;
     text-align: center;
-
 }
 
 .wrapper .input-box {
@@ -73,14 +69,13 @@ body {
     top: 70%;
     transform: translateY(-50%);
     font-size: 20px;
-
 }
 
 .wrapper .remember-forgot {
     display: flex;
     justify-content: space-between;
     font-size: 14.5px;
-    margin: -15px 0 15px
+    margin: -15px 0 15px;
 }
 
 .remember-forgot label input {
@@ -100,19 +95,17 @@ body {
     border: none;
     outline: none;
     border-radius: 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     font: size 16px;
     color: #333;
     font-weight: 600;
-
 }
 
 .wrapper .register-link {
     font-size: 14.5px;
     text-align: center;
     margin-top: 20px;
-
 }
 
 .register-link p a {
