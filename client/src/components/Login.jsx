@@ -1,12 +1,7 @@
-// import '../styles/First.css'
 import Button from "react-bootstrap/Button";
-// import Form from 'react-bootstrap/Form';
-// import 'bootstrap/dist/css/bootstrap.css';
-// import 'https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
 import React from "react";
 import "boxicons";
 import "../styles/Login.css";
-// import './aac.css'
 const Login = () => {
     return (
         <div>
