@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 const port = 3000;
 const { MongoClient, ServerApiVersion } = require("mongodb");
 
@@ -8,34 +9,51 @@ const mongoUsername = "revsallangula";
 const mongoPassword = "Tr3hnymzhOgOlVVj";
 const mongoDB = "DProject";
 
-const uri = `mongodb+srv://${mongoUsername}:${mongoPassword}@cluster0.u2ion8n.mongodb.net/?retryWrites=true&w=majority`;
 const uri = `mongodb+srv://${mongoUsername}:${mongoPassword}@cluster0.u2ion8n.mongodb.net/${mongoDB}?retryWrites=true&w=majority`;
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-    serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-    },
+mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 });
 
-async function run() {
-    try {
-        // Connect the client to the server	(optional starting in v4.7)
-        await client.connect();
-        // Send a ping to confirm a successful connection
-        await client.db("admin").command({ ping: 1 });
-        console.log(
-            "Pinged your deployment. You successfully connected to MongoDB!"
-        );
-    } finally {
-        // Ensures that the client will close when you finish/error
-        await client.close();
-    }
-}
-run().catch(console.dir);
+// Create a Mongoose Model for Profile
+const Profile = mongoose.model("Profile", {
+    username: String,
+    email: String,
+    password: String,
+});
 
+// Middleware to parse JSON in request bodies
+app.use(bodyParser.json());
+
+// Example route to add a profile
+app.post("/addProfile", async (req, res) => {
+    const { username, email, password } = req.body;
+
+    try {
+        // Create a new profile
+        const newProfile = new Profile({ username, email, password });
+        // Save the profile to the database
+        await newProfile.save();
+
+        res.status(201).json({ message: "Profile added successfully" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+});
+
+// Example route to get all profiles
+app.get("/getProfiles", async (req, res) => {
+    try {
+        // Retrieve all profiles from the database
+        const profiles = await Profile.find();
+        res.json(profiles);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+});
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
