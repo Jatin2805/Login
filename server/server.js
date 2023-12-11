@@ -1,8 +1,12 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const port = 3000;
+
+app.use(cors());
+
 const { MongoClient, ServerApiVersion } = require("mongodb");
 
 const mongoUsername = "revsallangula";
