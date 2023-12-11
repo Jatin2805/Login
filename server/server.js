@@ -67,6 +67,23 @@ app.get("/getProfiles", async (req, res) => {
     }
 });
 
+app.post("/login", async (req, res) => {
+    const { username, password } = req.body;
+
+    try {
+        const existingProfile = await Profile.findOne({ username, password });
+
+        if (existingProfile) {
+            res.status(200).json({ message: "Login successful" });
+        } else {
+            res.status(401).json({ message: "Invalid username or password" });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+});
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
