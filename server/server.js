@@ -16,7 +16,7 @@ mongoose.connect(uri, {
     useUnifiedTopology: true,
 });
 
-// Create a Mongoose Model for Profile
+// Mongoose Model for Profile
 const Profile = mongoose.model("Profile", {
     username: String,
     email: String,
@@ -26,7 +26,7 @@ const Profile = mongoose.model("Profile", {
 // Middleware to parse JSON in request bodies
 app.use(bodyParser.json());
 
-// Example route to add a profile
+// Route to add a profile
 app.post("/addProfile", async (req, res) => {
     const { username, email, password } = req.body;
 
@@ -43,7 +43,7 @@ app.post("/addProfile", async (req, res) => {
     }
 });
 
-// Example route to get all profiles
+// Route to get all profiles
 app.get("/getProfiles", async (req, res) => {
     try {
         // Retrieve all profiles from the database
@@ -54,6 +54,7 @@ app.get("/getProfiles", async (req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 });
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
