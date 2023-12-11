@@ -31,9 +31,17 @@ app.post("/addProfile", async (req, res) => {
     const { username, email, password } = req.body;
 
     try {
-        // Create a new profile
+        const existingProfile = await Profile.findOne({
+            $or: [{ username }, { email }],
+        });
+
+        if (existingProfile) {
+            return res.status(400).json({
+                message:
+                    "Profile with the same username or email already exists. Please try again",
+            });
+        }
         const newProfile = new Profile({ username, email, password });
-        // Save the profile to the database
         await newProfile.save();
 
         res.status(201).json({ message: "Profile added successfully" });
