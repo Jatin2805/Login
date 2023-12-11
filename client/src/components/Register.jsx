@@ -21,6 +21,9 @@ const Register = () => {
                 console.log("Registration successful");
             } else {
                 console.error("Registration failed");
+                alert(
+                    "Username or eMail is already registered. Please Try Again!"
+                );
             }
         } catch (error) {
             console.error("Error during registration", error);
